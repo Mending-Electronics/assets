@@ -20,6 +20,12 @@ def process_svg_files(hex_color):
             with open(os.path.join(source_folder, filename), 'r') as file:
                 content = file.read()
 
+            # Remove width and height attributes
+            content = re.sub(r'stroke-width="[^"]*"', '', content)
+            content = re.sub(r'stroke-height="[^"]*"', '', content)
+            content = re.sub(r'width="[^"]*"', '', content)
+            content = re.sub(r'height="[^"]*"', '', content)
+
             # Replace existing fill attributes
             content = re.sub(r'fill="#[0-9A-Fa-f]{3,6}"', f'fill="{hex_color}"', content)
 
@@ -46,12 +52,13 @@ def clear_and_copy_files(destination_folder):
         shutil.copy(os.path.join(destination_folder, filename), static_svg_folder)
 
 def main():
+    print("Draw and save as your vectorial work into optimized *.svg from Inkscape")
     hex_color = input("Enter a hexadecimal color (e.g., #1572B6 or #333): ")
 
     if is_hex_color(hex_color):
         process_svg_files(hex_color)
         clear_and_copy_files(hex_color)
-        print(f"SVG files have been processed and saved in the folder '{hex_color}', n\and copied to 'static/svg/'.")
+        print(f"SVG files have been processed and saved in the folder '{hex_color}', and copied to 'static/svg/'.")
     else:
         print("Invalid hexadecimal color value.")
 
