@@ -28,6 +28,10 @@ def process_svg_files(hex_color):
 
             # Remove <style> tags
             content = re.sub(r'<style[^>]*>.*?</style>', '', content, flags=re.DOTALL)
+            
+            # Remove <defs> tags
+            content = re.sub(r'<defs[^>]*>.*?</defs>', '', content, flags=re.DOTALL)
+             
 
             # Replace existing fill attributes
             content = re.sub(r'fill="#[0-9A-Fa-f]{3,6}"', f'fill="{hex_color}"', content)
