@@ -1,3 +1,5 @@
+#Alexandre JALLET
+
 import os
 import re
 import shutil
@@ -59,6 +61,7 @@ def clear_and_copy_files(destination_folder):
         shutil.copy(os.path.join(destination_folder, filename), static_svg_folder)
 
 def main():
+    print("\nNote : Draw and save your vector project in Inkscake's optimized *.svg format.\n")
     hex_color = input("Enter a hexadecimal color (e.g., #1572B6 or #333): ")
 
     if is_hex_color(hex_color):
